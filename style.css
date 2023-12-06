@@ -1,0 +1,38 @@
+body {
+    position: relative;
+    background-color: bisque;
+}
+
+.modal_registro,
+.modal_eliminar {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    position: absolute;
+    padding: 2rem;
+    height: auto;
+    background-color: rgb(170, 152, 90);
+    border-radius: 15px;
+}
+
+.modal_container {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    top: 0;
+    left: 0;
+}
+
+.width_250 {
+    width: 250px;
+}
+
+.display_none {
+    display: none
+}
+
+label {
+    width: 100px;
+}

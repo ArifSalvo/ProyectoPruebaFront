@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mantenimiento Trabajadores</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center mt-3">Lista de Trabajadores</h1>
+        <div class="d-flex justify-content-between align-items-center">
+            <button type="button" class="btn btn-success my-4" id="buttonRegistro">Nuevo Registro</button>
+            <select id="selectSexo" class="form-select width_250" aria-label="Default select example">
+                <option value="todos" selected>Todos</option>
+                <option value="M">Hombres</option>
+                <option value="F">Mujeres</option>
+            </select>
+        </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th class="text-center" scope="col">Tipo Documento</th>
+                    <th class="text-center" scope="col">Numero Documento</th>
+                    <th class="text-center" scope="col">Nombres</th>
+                    <th class="text-center" scope="col">Sexo</th>
+                    <th class="text-center" scope="col">Departamento</th>
+                    <th class="text-center" scope="col">Provincia</th>
+                    <th class="text-center" scope="col">Distrito</th>
+                    <th class="text-center" colspan="2" scope="col">Acción</th>
+                </tr>
+            </thead>
+            <tbody id="table-body">
+            </tbody>
+        </table>
+    </div>
+
+    <!-- MODAL DE REGISTRO -->
+    <div class="modal_container display_none" id="modalR">
+        <div class="modal_registro">
+            <h3 class="text-center">
+                Creación Trabajador
+            </h3>
+            <div class="d-flex gap-4 flex-row justify-content-center align-items-center">
+                <label>
+                    Tipo Documento
+                </label>
+                <div>
+                    <select id="selectDoc" class="form-select width_250" aria-label="Default select example">
+                        <option value="null" selected>Elegir...</option>
+                        <option value="DNI">DNI</option>
+                        <option value="Pasaporte">Pasaporte</option>
+                    </select>
+                    <p class="fs-6 text-danger display_none fw-bold" id="error-tipo-doc">Seleccione un tipo de documento
+                    </p>
+                </div>
+            </div>
+            <div class="d-flex gap-4 my-2 flex-row justify-content-center align-items-center">
+                <label>
+                    Numero Documento
+                </label>
+                <div>
+                    <input id="numeroDoc" type="text" class="form-control width_250" aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-default">
+                    <p class="fs-6 text-danger display_none fw-bold" id="error-num-doc">Escriba un número de documento
+                    </p>
+                </div>
+            </div>
+            <div class="d-flex gap-4 my-2 flex-row justify-content-center align-items-center">
+                <label>
+                    Nombres
+                </label>
+                <div>
+                    <input id="nombres" type="text" class="form-control width_250" aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-default">
+                    <p class="fs-6 text-danger display_none fw-bold" id="error-nombre">Escriba un nombre de trabajador
+                    </p>
+                </div>
+            </div>
+            <div class="d-flex gap-4 my-2 flex-row justify-content-center align-items-center">
+                <label>
+                    Sexo
+                </label>
+                <div class="width_250">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="sexo" id="inlineRadio1" value="M">
+                        <label class="form-check-label" for="inlineRadio1">Masculino</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="sexo" id="inlineRadio2" value="F">
+                        <label class="form-check-label" for="inlineRadio2">Femenino</label>
+                    </div>
+                    <p class="fs-6 text-danger display_none fw-bold" id="error-sexo">Elija un sexo</p>
+                </div>
+            </div>
+            <div class="d-flex gap-4 flex-row justify-content-center align-items-center mb-3">
+                <label>
+                    Departamento
+                </label>
+                <div>
+                    <select id="selectDep" class="form-select width_250" aria-label="Default select example">
+                        <option value="null" selected>Elegir...</option>
+                    </select>
+                    <p class="fs-6 text-danger display_none fw-bold" id="error-departamento">Elija un departamento</p>
+                </div>
+            </div>
+            <div class="d-flex gap-4 flex-row justify-content-center align-items-center mb-3">
+                <label>
+                    Provincia
+                </label>
+                <div>
+                    <select id="selectProv" class="form-select width_250" aria-label="Default select example">
+                        <option value="null" selected>Elegir...</option>
+                    </select>
+                    <p class="fs-6 text-danger display_none fw-bold" id="error-provincia">Elija una provincia</p>
+                </div>
+            </div>
+            <div class="d-flex gap-4 flex-row justify-content-center align-items-center mb-3">
+                <label>
+                    Distrito
+                </label>
+                <div>
+                    <select id="selectDist" class="form-select width_250" aria-label="Default select example">
+                        <option value="null" selected>Elegir...</option>
+                    </select>
+                    <p class="fs-6 text-danger display_none fw-bold" id="error-distrito">Elija un distrito</p>
+                </div>
+            </div>
+            <div class="d-flex flex-row justify-content-center align-items-center gap-4">
+                <button type="button" class="btn btn-danger" id="buttonCerrarRegistro">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="buttonConfirmarRegistro">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE ELIMINAR -->
+    <div class="modal_container display_none" id="modalE">
+        <div class="modal_eliminar">
+            <h2 class="text-center">Eliminar</h2>
+            <p class="fw-bold">¿Está seguro de eliminar el registro?</p>
+            <div class="d-flex flex-row justify-content-center align-items-center gap-4">
+                <button type="button" class="btn btn-danger" id="buttonCancelarEliminar">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="buttonAceptarEliminar">Aceptar</button>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="./script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
